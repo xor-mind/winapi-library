@@ -1,0 +1,22 @@
+namespace TestingIdentifier
+{
+	class TestingIdentifierWnd : public Window
+	{
+
+	public:	
+		WPD()
+		{
+			onCreate
+			onWndDestruction
+			return DWP;
+		}
+	};
+
+	CreateUnitTest( IdentifierTest, "Identifier" )
+	{
+		WindowPtr parent( 
+			WindowFactory<TestingIdentifierWnd>::create() );
+		parent->Expunge();
+		parent->RunPeekMessageLoop();
+	}
+}

@@ -1,0 +1,29 @@
+﻿Build started 6/5/2013 11:03:43 PM.
+     1>Project "C:\Users\Michael\Documents\code\cpp\library\winapi-library\winapi.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Touching "UnicodeDebug\winapi.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\Michael\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib" Shlwapi.lib /NOLOGO UnicodeDebug\2DMath.obj
+         UnicodeDebug\Bitmap.obj
+         UnicodeDebug\Console.obj
+         UnicodeDebug\splitter.obj
+         UnicodeDebug\winapi_GUI.obj
+         UnicodeDebug\winapi_structures.obj
+         UnicodeDebug\winapi_file.obj
+         UnicodeDebug\winapi_error.obj
+         UnicodeDebug\winapi_gdi.obj
+         UnicodeDebug\winapi_RAII.obj
+         UnicodeDebug\winapi_shell.obj
+         UnicodeDebug\winapi_window.obj
+         UnicodeDebug\winapi_wout.obj
+         winapi.vcxproj -> C:\Users\Michael\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib
+       FinalizeBuildStatus:
+         Deleting file "UnicodeDebug\winapi.unsuccessfulbuild".
+         Touching "UnicodeDebug\winapi.lastbuildstate".
+     1>Done Building Project "C:\Users\Michael\Documents\code\cpp\library\winapi-library\winapi.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.24

@@ -1,0 +1,64 @@
+// untested untested untested untested untested untested untested untested 
+
+// tested tested tested tested tested tested tested tested tested tested 
+
+
+Window();
+template <class T> static Window* createWindow(int x, int y, uint width, uint height, IWindow* parent = NULL);
+template <class T> static Window* createWindow(int x, int y, uint width, uint height, UINT classStyle, UINT wndFlags, IWindow* parent = NULL);
+template <class T> static Window* createWindow(int x, int y, uint width, uint height, TCHAR* const className, HBRUSH brush, IWindow* parent = NULL);
+template <class T> static Window* createWindow(int x, int y, uint width, uint height, TCHAR* const className, TCHAR* const windowName, UINT classStyle, UINT wndFlags, HBRUSH background, IWindow* parent = NULL);
+template <class T> static Window* createDlg(IWindow* parent, HINSTANCE hInstance, LPCTSTR lpTemplate);
+virtual ~Window() { DestroyWindow(); UnregisterClass(className, GetModuleHandle(0)); }	
+
+virtual void InitWindow(int x, int y, uint width, uint height, IWindow* parent = NULL);
+virtual void InitWindow(int x, int y, uint width, uint height, TCHAR* const windowName, IWindow* parent = NULL);
+virtual HWND InitWindow(IWindow* parent, HMENU menu, HBRUSH backgroundBrush, TCHAR* const className, TCHAR* const windowName, UINT classStyle, UINT wndFlags, int xPos, int yPos, int width, int height);
+virtual HWND InitDlg(IWindow* parent, HINSTANCE hInstance, LPCTSTR lpTemplate);
+// positioning and resizing operation
+virtual void SetNonClientPos(int x, int y);
+// xPos and yPos will be the window's nonclient top left pixel wrt parent, if there's no parent it uses the screen as the parent.
+virtual int xPos()  const;
+virtual int yPos()  const;
+
+virtual int x1Pos() const;
+virtual int y1Pos() const;
+// nonclient width and height
+virtual int Width()        const; 
+virtual int Height()       const;
+
+virtual int ClientWidth()  const;// width and height of client, not including non client area ( caption bar, menu, border, etc..)
+virtual int ClientHeight() const;
+virtual int xPosClient()   const;
+virtual int yPosClient()   const;
+virtual int xPosClientInScreen()  const;
+virtual int yPosClientInScreen() const;
+virtual int dxNonClientAndClient();
+virtual int dyNonClientAndClient(); 
+RECT ScreenRect();
+
+POINT ClientToScreen(int x, int y);
+POINT & ClientToScreen(POINT& p) const;
+POINT & ScreenToClient(POINT& p) const;
+POINT ScreenToClient(int x, int y);
+
+HWND Wnd() const { return hWnd; } // handle used in the winapi
+void SetWnd(HWND hWnd) { this->hWnd = hWnd; }
+void SetParent(Window* parent) { this->parent = parent; if (parent) hParent = 
+	parent->Wnd(); }
+void SetWindowAndParent(HWND hWnd, Window *parent) { SetWnd(hWnd); SetParent(parent); } 
+void SetWndClassName(const tstring& name);
+void DestroyWindow();
+virtual void AfterCreate() {}
+void ForceWindowRedraw();
+
+static int RunGetMessageLoop();
+static  WND_PROC_DECL(Handler);
+static  DLG_PROC_DECL(Handler);
+virtual WND_PROC_DECL() { return DEF_WND_PROC; }
+virtual DLG_PROC_DECL() { return FALSE; }
+
+
+
+virtual void CenterVertically(IWindow* topWindow, IWindow* bottomWidow);
+template <class T> static Window* createWindow(int x, int y, uint width, uint height, TCHAR* const className, IWindow* parent = NULL);
