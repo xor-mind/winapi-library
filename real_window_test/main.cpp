@@ -16,11 +16,11 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 #define CreateRunTest         KWindow w; w.Init(); Window::RunGetMessageLoop();
 #define CreateRunDestroyTest  KWindow w; w.Init(); w.Expunge(); Window::RunGetMessageLoop();
 #define useCwDefaults		  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
-//#define test_constructors_and_destructors
+#define test_constructors_and_destructors
 //#define test_position_and_dimension
 //#define test_messaging
 //#define test_padding
-#define test_useful_methods
+//#define test_useful_methods
 //#define test_window_distance_methods
 //#define test_double_buffer
 //#define test_log_window

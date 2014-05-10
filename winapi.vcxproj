@@ -107,7 +107,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\boost_1_53_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\c\boost_1_53_0;C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -116,9 +116,12 @@
     <Lib>
       <SubSystem>
       </SubSystem>
-      <AdditionalDependencies>Shlwapi.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Shlwapi.lib;abomb_console.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -169,7 +172,6 @@
   <ItemGroup>
     <ClCompile Include="2DMath.cpp" />
     <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="Console.cpp" />
     <ClCompile Include="splitter.cpp" />
     <ClCompile Include="winapi_GUI.cpp" />
     <ClCompile Include="winapi_structures.cpp" />
@@ -178,6 +180,7 @@
     <ClCompile Include="winapi_gdi.cpp" />
     <ClCompile Include="winapi_RAII.cpp" />
     <ClCompile Include="winapi_shell.cpp" />
+    <ClCompile Include="winapi_window.cpp" />
     <ClCompile Include="winapi_wout.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +188,6 @@
     <ClInclude Include="adams_macros.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="color.h" />
-    <ClInclude Include="Console.h" />
     <ClInclude Include="Factories.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="Prerequisites.h" />

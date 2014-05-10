@@ -1,13 +1,11 @@
-﻿Build started 6/5/2013 11:03:43 PM.
-     1>Project "C:\Users\Michael\Documents\code\cpp\library\winapi-library\winapi.vcxproj" on node 2 (Build target(s)).
-     1>InitializeBuildStatus:
-         Touching "UnicodeDebug\winapi.unsuccessfulbuild".
-       ClCompile:
-         All outputs are up-to-date.
+﻿Build started 5/9/2014 3:49:33 AM.
+     1>Project "C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\winapi.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\c\boost_1_53_0 /IC:\Users\abombthecoder\Documents\code\cpp\library\abomb_console /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"UnicodeDebug\\" /Fd"UnicodeDebug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt winapi_window.cpp
+         winapi_window.cpp
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\Michael\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib" Shlwapi.lib /NOLOGO UnicodeDebug\2DMath.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib" Shlwapi.lib abomb_console.lib /LIBPATH:C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console\Debug /NOLOGO UnicodeDebug\2DMath.obj
          UnicodeDebug\Bitmap.obj
-         UnicodeDebug\Console.obj
          UnicodeDebug\splitter.obj
          UnicodeDebug\winapi_GUI.obj
          UnicodeDebug\winapi_structures.obj
@@ -18,12 +16,9 @@
          UnicodeDebug\winapi_shell.obj
          UnicodeDebug\winapi_window.obj
          UnicodeDebug\winapi_wout.obj
-         winapi.vcxproj -> C:\Users\Michael\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib
-       FinalizeBuildStatus:
-         Deleting file "UnicodeDebug\winapi.unsuccessfulbuild".
-         Touching "UnicodeDebug\winapi.lastbuildstate".
-     1>Done Building Project "C:\Users\Michael\Documents\code\cpp\library\winapi-library\winapi.vcxproj" (Build target(s)).
+         winapi.vcxproj -> C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib
+     1>Done Building Project "C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\winapi.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.24
+Time Elapsed 00:00:00.95

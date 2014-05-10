@@ -10,7 +10,7 @@
 #include <algorithm>
 
 #pragma warning(disable:4003) // removes warning about using macros with empty parans, useful to take advantage of syntx such as WND_PROC_DECL(); 
-
+ 
 #define WIN_MAIN              int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 #define WND_PROC_PARAM		  HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 #define WND_PROC_DECL(x)      LRESULT CALLBACK x##WndProc(WND_PROC_PARAM)
