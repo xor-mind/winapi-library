@@ -213,7 +213,7 @@ OpenSaveFileDialog::OpenSaveFileDialog()
 	memcpy(m_Filtertstring, "*.*\0*.*\0", 9);
 
 	// start search at module directory
-	tstrcpy(m_InitialDirectory, File::GetModuleDirectoryPath().c_str());
+	_tcscpy_s(m_InitialDirectory, _countof(m_InitialDirectory), File::GetModuleDirectoryPath().c_str());
 }
 
 OpenSaveFileDialog::~OpenSaveFileDialog()

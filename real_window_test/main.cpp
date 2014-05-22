@@ -17,13 +17,13 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 #define CreateRunDestroyTest  KWindow w; w.Init(); w.Expunge(); Window::RunGetMessageLoop();
 #define useCwDefaults		  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
 
-//#define test_constructors_and_destructors
-//#define test_position_and_dimension
-//#define test_messaging
-//#define test_padding
-//#define test_useful_methods
-//#define test_window_distance_methods
-//#define test_double_buffer
+#define test_constructors_and_destructors
+#define test_position_and_dimension
+#define test_messaging
+#define test_padding
+#define test_useful_methods
+#define test_window_distance_methods
+#define test_double_buffer
 //#define test_log_window
 #define test_gdi_draw
 
@@ -847,6 +847,7 @@ namespace DoubleBuffer
 		WindowPtr parent( WindowFactory<DblBuffedWnd>::create() );
 		//parent->Expunge();
 		parent->RunPeekMessageLoop();
+		parent->UnregisterClass();
 	}
 }
 

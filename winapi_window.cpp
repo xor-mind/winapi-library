@@ -179,8 +179,8 @@ Window * Window::InitWnd(IWindow* parent, HMENU menu, HBRUSH backgroundBrush, TC
 {
 	this->parent = (Window*)parent;
 	hParent = ( parent ? this->parent->Wnd() : NULL );
-	tstrcpy(this->className, className ? className : HasParent(ClassName));
-	tstrcpy(this->windowName, windowName ? windowName : HasParent(WindowName)); 
+	_tcscpy_s(this->className, _countof(this->className), className ? className : HasParent(ClassName));
+	_tcscpy_s(this->windowName, _countof(this->windowName), windowName ? windowName : HasParent(WindowName)); 
 	classStyle = classStyle ? classStyle : defaultClassStyle;
 	wndFlags = wndFlags ? wndFlags : HasParent(WindowStyle);
 	if ( this->parent ) 
@@ -280,7 +280,7 @@ void Window::Expunge()
 
 void Window::SetWndClassName(const tstring& name)
 {
-	tstrcpy(className, name.c_str());
+	_tcscpy_s(className, _countof(className), name.c_str());
 }
 
 WND_PROC_DECL(Window::)

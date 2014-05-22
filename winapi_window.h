@@ -308,7 +308,7 @@ public:
 	Window * SetText(const TCHAR * const windowName);
 	Window * ShowWindow();
 	Window * ProcessPostQuitMessage(bool b);
-	Window * SetClassName(TCHAR* className) { tstrcpy(this->className, className); return this; }
+	Window * SetClassName(TCHAR* className) { _tcscpy_s(this->className, _countof(this->className), className); return this; }
 
 	HFONT GetCurrentFont();
 
