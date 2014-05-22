@@ -1,3 +1,7 @@
+/*
+Brush and pen factories for creating brushes and pens with certain colors. The factory objects keep track of all objects and delete
+them when going out of scope. The factories may also be used as singletons.
+*/
 #ifndef FACTORIES_H
 #define FACTORIES_H
 
@@ -29,6 +33,7 @@ struct BrushFactory
 
 	std::vector<HBRUSH> brushList;
 
+	static HBRUSH Orange() { static HBRUSH b = bf().orange();    return b; }
 	static HBRUSH Red()    { static HBRUSH b = bf().red();    return b; }
 	static HBRUSH Yellow() { static HBRUSH b = bf().yellow(); return b; }
 	static BrushFactory & bf() { static BrushFactory bf; return bf; }

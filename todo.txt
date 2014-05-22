@@ -1,0 +1,5 @@
+Window.h
+Work on Window::Expunge so it it's not trying to Destroying Children window a redundant amount of times.
+
+Factories.h
+Can refactor by creating a pure GdiObject class, and deleting the copy and paste code.

@@ -126,6 +126,7 @@ public:
 		DeleteDC(hdcMem);
 	}
 	
+	// return the window we're double buffering
 	Window* DoubleBufferedWindow() { return w; }
 	virtual void SetupDoubleBuffer(Window* w)
 	{
@@ -150,7 +151,7 @@ public:
 		isSecondaryGDI = true;
 		this->primaryGDI = primaryGDI;
 		back_dc = primaryGDI->BackDC();
-		// calculate backBufferRectof this secondaryGDI with respect to the 
+		// calculate backBufferRect of this secondaryGDI with respect to the 
 		// primaryGDI, which translates to figuring out the differences 
 		// between the parent window client child coords.
 		POINT p = { primaryGDI->DoubleBufferedWindow()->PaddingLeft(), 
@@ -212,6 +213,7 @@ public:
 	bool ChangeDisplayMode(int pixel_width, int pixel_height, bool switch_back);
 	virtual RECT DoubleBufferedRect() { return doubleBufferedRect; }
 	virtual HDC BackDC() { return back_dc; }
+	// set the backDC to target dc
 	void BackDC(HDC dc) { back_dc = dc; }
 	virtual GDI* PrimaryGDI() { return primaryGDI; }
 };

@@ -7,7 +7,7 @@
 #include "TestTracker.h"
 #include "resource.h"
 
-#include "..\Factories.h"
+#include "..\GdiObjectFactory.h"
 #include "..\winapi_error.h"
 #include "..\winapi_structures.h"
 #include "..\winapi_window.h"
@@ -19,6 +19,7 @@
 #include <boost\scoped_ptr.hpp>
 #include <boost\shared_ptr.hpp>
 
+// Assert w is not null and that we have a valid hWnd.
 void ValidateHWND(Window* w);
 
 int dyTwoWindows(Window* top, Window* bottom);
@@ -88,13 +89,13 @@ protected:
 #define     S_RECT(x, ...)			S_VAR(RECT, x, __VA_ARGS__)
 #define     NBRUSH				    (HBRUSH)GetStockObject(NULL_BRUSH)
 //typedef		std::vector<Window *>	WindowList;
-#define		TT						TestTracker						
+//#define		TT						TestTracker						
 #define		CreateFixture(x)		TT_FIXTURE_TEST_CASE(x)
 #define		Assert(x,y)				BOOST_REQUIRE_EQUAL(x,y)
 #define		isEqual(x,y)			BOOST_REQUIRE_EQUAL(x,y)
 #define		AssertErr(x, y, _err)   BOOST_REQUIRE_LE( abs( x - y ), _err )
 
-#define CreateUnitTest( TestClassName, TestStringName )					\
+#define CreateWinapiWindowUnitTest( TestClassName, TestStringName )					\
 																		\
 struct TestClassName : TT, TTK										    \
 {																		\

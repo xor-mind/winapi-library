@@ -16,7 +16,8 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 #define CreateRunTest         KWindow w; w.Init(); Window::RunGetMessageLoop();
 #define CreateRunDestroyTest  KWindow w; w.Init(); w.Expunge(); Window::RunGetMessageLoop();
 #define useCwDefaults		  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
-#define test_constructors_and_destructors
+
+//#define test_constructors_and_destructors
 //#define test_position_and_dimension
 //#define test_messaging
 //#define test_padding
@@ -24,7 +25,7 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 //#define test_window_distance_methods
 //#define test_double_buffer
 //#define test_log_window
-//#define test_gdi_draw
+#define test_gdi_draw
 
 #ifdef test_constructors_and_destructors
 
@@ -34,8 +35,8 @@ namespace InitiationMethods
 	{
 		BrushFactory bf;
 		WindowPtr parent( CreateWnd(BTW_PARAM,NULL) ),
-			child ( CreateWnd(0, 0, 200, 200, _T("child"), bf.blue(), parent.get()) ),
-			child1( CreateWnd(0,0, 100, 100, _T("child1"), bf.red(), child.get()) );
+			      child ( CreateWnd(0, 0, 200, 200, _T("child"), bf.blue(), parent.get()) ),
+			      child1( CreateWnd(0,0, 100, 100, _T("child1"), bf.red(), child.get()) );
 			
 		WindowList wl; wl += parent.get(),child.get(),child1.get();
 			
@@ -45,7 +46,7 @@ namespace InitiationMethods
 		Window::RunGetMessageLoop();
 	}
 
-	CreateUnitTest(IntitationMethods, "Initiation Methods")
+	CreateWinapiWindowUnitTest(IntitationMethods, "Initiation Methods")
 	{
 		Window* w = new Window();  
 
@@ -80,7 +81,7 @@ namespace InitiationMethods
 
 namespace Factories
 {
-	CreateUnitTest(Factories, "Factories") 
+	CreateWinapiWindowUnitTest(Factories, "Factories") 
 	{
 		Window* w = CreateWnd(BTW_PARAM, NULL); 
 		ValidateHWND(w); 
@@ -135,7 +136,7 @@ namespace Factories
 	
 namespace ClientScreenConversion
 {
-	CreateUnitTest(ClientScreenConversion, "Client To Screen")
+	CreateWinapiWindowUnitTest(ClientScreenConversion, "Client To Screen")
 	{
 		Window* w = CreateWnd();
  
@@ -174,7 +175,7 @@ namespace WindowDimensions
 		w->Expunge();
 	}
 
-	CreateUnitTest(WindowDimensions, "Window Dimensions")
+	CreateWinapiWindowUnitTest(WindowDimensions, "Window Dimensions")
 	{ 
 		TestScreenRect();
 		TestSetPosWith4args();
@@ -184,7 +185,7 @@ namespace WindowDimensions
 
 namespace WindowDimensionsWRtoParent
 {
-	CreateUnitTest(WindowDimensionsWRtoParent, "Window Dimensions WRT Parent")
+	CreateWinapiWindowUnitTest(WindowDimensionsWRtoParent, "Window Dimensions WRT Parent")
 	{
 		RECT childRect = {0, 0, 50, 50}, 
 			child1Rect = {50, 100, 100, 200};
@@ -245,7 +246,7 @@ namespace WindowPositioning
 		return r.bottom;
 	}
 
-	CreateUnitTest(WindowPositioning, "Window Positioning")
+	CreateWinapiWindowUnitTest(WindowPositioning, "Window Positioning")
 	{
 		// test moving window around the screen
 		boost::scoped_ptr<Window> parent( CreateWnd(BTW_PARAM, NULL) );
@@ -353,7 +354,7 @@ namespace CenterWindow
 		Window::RunGetMessageLoop();	
 	}
 
-	CreateUnitTest(CenterWindow,"Centering Window") 
+	CreateWinapiWindowUnitTest(CenterWindow,"Centering Window") 
 	{
 		Test3WindowsInAScreen();
 		Test3Children();
@@ -362,7 +363,7 @@ namespace CenterWindow
 	}	
 }
 
-CreateUnitTest(NonClientScreenRect, "ScreenRect WRT Parent")
+CreateWinapiWindowUnitTest(NonClientScreenRect, "ScreenRect WRT Parent")
 {
 	RECT pRect  = { 100, 100, 500, 500 },
 		 cRect = { 50, 50, 400, 400 };
@@ -383,7 +384,7 @@ CreateUnitTest(NonClientScreenRect, "ScreenRect WRT Parent")
 	delete p; delete c; 
 }
 
-CreateUnitTest( GetClientRect, "GetClientRect" )
+CreateWinapiWindowUnitTest( GetClientRect, "GetClientRect" )
 {
 	WindowPtr w( ( new Window())->SetPadding( 100, 100, 100, 100 )->InitAdjustedWnd(0, 0, 600, 600, NULL) );
 	RECT r = w->GetClientRect(), r1 = { 100, 100, 600 - 100*2, 600 - 100*2 };
@@ -398,7 +399,7 @@ CreateUnitTest( GetClientRect, "GetClientRect" )
 
 namespace TestMessaging
 {
-	CreateUnitTest(TestMessaging, "Messaging")
+	CreateWinapiWindowUnitTest(TestMessaging, "Messaging")
 	{
 		WindowPtr w ( CreateWnd() );
 		ValidateHWND( w.get() );
@@ -462,7 +463,7 @@ namespace PaddingTest
 		Window::RunGetMessageLoop();
 	}
 
-	CreateUnitTest(PaddingTest, "Padding") 
+	CreateWinapiWindowUnitTest(PaddingTest, "Padding") 
 	{
 		TestParentAndChild();
 		TestParentAnd3Child(); 
@@ -492,7 +493,7 @@ namespace PushButtons
 		}
 	};
 
-	CreateUnitTest(PushButtons, "Push Button")
+	CreateWinapiWindowUnitTest(PushButtons, "Push Button")
 	{
 		WindowPtr main( WindowFactory<MyDlg>::create(IDD_MAINDLG) );
 		WindowPtr   ok( new Window() ); ok->SetWndAndParent(GetDlgItem(main->Wnd(), IDOK), main.get());// AD_TODO add constructor that works with control ids...
@@ -505,7 +506,7 @@ namespace PushButtons
 
 //namespace ChangePenWidth
 //{
-//	CreateUnitTest(ChangePenWidth, "Change Pen Width")
+//	CreateWinapiWindowUnitTest(ChangePenWidth, "Change Pen Width")
 //	{
 //		WindowPtr p( CreateWnd() );
 //		Window::DC dc(p.get());
@@ -551,42 +552,42 @@ namespace ChangeWndClass
 		Window::RunGetMessageLoop();
 	}
 
-	CreateUnitTest(ChangeWndClass, "Changing Wnd Class")
+	CreateWinapiWindowUnitTest(ChangeWndClass, "Changing Wnd Class")
 	{
 		TestBrushChange();
 		TestCursorChange();
 	}
 }
 
-	#ifdef DLG_TEXT
+
 		
-		class DlgText : TT
-		{
-			TEST_NAME("Dlg Set/Get Text");
-		public:
-			DlgText() : TT(TestName()) { RunTest(); }
+//class DlgText : TT
+//{
+//	TEST_NAME("Dlg Set/Get Text");
+//public:
+//	DlgText() : TT(TestName()) { RunTest(); }
+//
+//	void Test() 
+//	{
+//		WindowPtr main  ( CreateWnd(IDD_MAINDLG) );
+//		WindowPtr child ( new Window() );
+//		child->SetWndAndParent( GetDlgItem( main->Wnd(), IDCLOSE ) , main.get() );
+//
+//		tstring s = child->GetText();
+//
+//		Assert(s.c_str(), tstring(_T("Close")).c_str());
+//		Assert(s.size(), tstring(_T("Close")).size());
+//		Assert(s.length(), tstring(_T("Close")).length());
+//				
+//
+//		Window::RunGetMessageLoop();
+//	}
+//};
+//CreateFixture(DlgText) { }
 
-			void Test() 
-			{
-				WindowPtr main  ( CreateWnd(IDD_MAINDLG) );
-				WindowPtr child ( new Window() );
-				child->SetWndAndParent( GetDlgItem( main->Wnd(), IDCLOSE ) , main.get() );
 
-				tstring s = child->GetText();
 
-				Assert(s.c_str(), tstring(_T("Close")).c_str());
-				Assert(s.size(), tstring(_T("Close")).size());
-				Assert(s.length(), tstring(_T("Close")).length());
-				
-
-				Window::RunGetMessageLoop();
-			}
-		};
-		CreateFixture(DlgText) { }
-
-	#endif
-
-CreateUnitTest(SetClassNameBeforeWndInit, "SetClassName before WndInit")
+CreateWinapiWindowUnitTest(SetClassNameBeforeWndInit, "SetClassName before WndInit")
 {
 	WindowPtr p( ( new Window() )->SetClassName( _T("Parent") )->InitWnd( 0, 0, 500, 500, NULL ) );
 	{
@@ -608,10 +609,10 @@ CreateUnitTest(SetClassNameBeforeWndInit, "SetClassName before WndInit")
 
 namespace WindowDistance
 {
-	CreateUnitTest(WindowDistanceTest, "Window Distance")
+	CreateWinapiWindowUnitTest(WindowDistanceTest, "Window Distance")
 	{
 		WindowPtr p ( CreateWnd() ), c ( CreateWnd( p.get( ) ) );
-
+		 
 		int dx = p->dxLeftAndLeft(c.get()), dx1 = p->dxRightAndRight(c.get()),
 			dy = p->dyTopAndTop(c.get()),   dy1 = p->dyBotAndBot(c.get());
 
@@ -744,7 +745,7 @@ namespace DoubleBuffer
 				}
 				handleCreate()
 				{
-					topHalf.reset( ( new TopHalf() )->InitWnd(10, 0, ClientWidth() - 10, ClientHeight()/2, _T("TopHalfClass"), _T("TopHalfWindow"), parent)->SetClassBrush(NBRUSH) );
+					topHalf.reset( ( new TopHalf() )->InitWnd(0, 0, ClientWidth(), ClientHeight()/2, _T("TopHalfClass"), _T("TopHalfWindow"), parent)->SetClassBrush(NBRUSH) );
 					botHalf.reset( ( new BotHalf() )->InitWnd(0, ClientHeight()/2, ClientWidth(), ClientHeight()/2, _T("BopHalfClass"), _T("BotHalfWindow"), parent)->SetClassBrush(NBRUSH) );
 				}
 				void UpdateFrame()
@@ -841,10 +842,10 @@ namespace DoubleBuffer
 		}	
 	};
 
-	CreateUnitTest( DoubleBufferTest, "Double Buffer" )
+	CreateWinapiWindowUnitTest( DoubleBufferTest, "Double Buffer" )
 	{
 		WindowPtr parent( WindowFactory<DblBuffedWnd>::create() );
-		parent->Expunge();
+		//parent->Expunge();
 		parent->RunPeekMessageLoop();
 	}
 }
@@ -855,7 +856,7 @@ namespace DoubleBuffer
 
 namespace TestingLogWindow
 {
-	CreateUnitTest( LogWindowTest, "Log Window" )
+	CreateWinapiWindowUnitTest( LogWindowTest, "Log Window" )
 	{
 		WindowPtr parent( WindowFactory<LogWnd>::create(0, 0, 240, 600, NULL) );
 		((LogWnd*)&*parent)->Log(_T("Hello World!\r\nthe answer is %d"), 42);
@@ -898,7 +899,7 @@ namespace TestingGdiDraw
 		using WindowGDI::Expunge;
 	};
 
-	CreateUnitTest( GdiDrawTest, "Gdi Drawing" )
+	CreateWinapiWindowUnitTest( GdiDrawTest, "Gdi Drawing" )
 	{
 		CreateRunTest
 	}

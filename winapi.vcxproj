@@ -188,7 +188,7 @@
     <ClInclude Include="adams_macros.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="color.h" />
-    <ClInclude Include="Factories.h" />
+    <ClInclude Include="GdiObjectFactory.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="Prerequisites.h" />
     <ClInclude Include="Singleton.h" />
@@ -208,6 +208,9 @@
     <ClInclude Include="winapi_shell.h" />
     <ClInclude Include="winapi_window.h" />
     <ClInclude Include="winapi_wout.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

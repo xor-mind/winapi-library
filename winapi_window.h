@@ -1,3 +1,13 @@
+/*
+winapi_window.h
+
+Objects: 
+
+Window: This objects provides methods for manipulating a window.. Very Similiar to
+an MFC CWindow. All Windows, including child Windows should be managed with smart pointers to avoid memory leaks.
+
+*/
+
 #ifndef WINAPI_WINDOW_H
 #define WINAPI_WINDOW_H
 
@@ -240,7 +250,8 @@ public:
 	} 
 	void UnregisterClass();
 	void DestroyWindow();
-	void Expunge(); // destroys window and unregisters wndclass
+	// destroys window and unregisters wndclass
+	void Expunge(); 
 	void SetWndClassName(const tstring& name);
 
 	Window* ForceRedraw();
