@@ -1,5 +1,5 @@
-#include "winapi_window.h"
-#include "winapi_gdi.h"
+#include "window.h"
+#include "gdi.h"
 #include "winapi_error.h"
 #include <vector>
 

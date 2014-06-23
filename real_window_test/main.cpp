@@ -2,8 +2,8 @@
 #define BOOST_TEST_MODULE WindowTest
 #include <boost\test\included\unit_test.hpp>
 #include "window_tests.h"
-#include "..\winapi_gdi.h"
-#include "..\winapi_wout.h"
+#include "..\gdi.h"
+#include "..\wout.h"
 #include "..\winapi_log_wnd.h"
 #include "..\2DMath.h"
 
@@ -17,15 +17,15 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 #define CreateRunDestroyTest  KWindow w; w.Init(); w.Expunge(); Window::RunGetMessageLoop();
 #define useCwDefaults		  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
 
-#define test_constructors_and_destructors
-#define test_position_and_dimension
-#define test_messaging
-#define test_padding
-#define test_useful_methods
-#define test_window_distance_methods
+//#define test_constructors_and_destructors
+//#define test_position_and_dimension
+//#define test_messaging
+//#define test_padding
+//#define test_useful_methods
+//#define test_window_distance_methods
 #define test_double_buffer
 //#define test_log_window
-#define test_gdi_draw
+//#define test_gdi_draw
 
 #ifdef test_constructors_and_destructors
 
@@ -83,13 +83,13 @@ namespace Factories
 {
 	CreateWinapiWindowUnitTest(Factories, "Factories") 
 	{
-		Window* w = CreateWnd(BTW_PARAM, NULL); 
+		Window* w = WindowFactory<>::create(BTW_PARAM, NULL); 
 		ValidateHWND(w); 
 		w->Expunge();
 		Window::RunGetMessageLoop();
 		delete w;
 
-		w = CreateWnd(BTW_PARAM, CS_OWNDC | CS_DBLCLKS 
+		w = WindowFactory<>::create(BTW_PARAM, CS_OWNDC | CS_DBLCLKS 
 			| CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, NULL); 
 		ValidateHWND(w); 
 		w->Expunge();
@@ -98,7 +98,7 @@ namespace Factories
 
 		TCHAR* windowName = _T("constructorTest");
 		HBRUSH b = CreateSolidBrush(RGB(255,0,0));
-		w = CreateWnd(BTW_PARAM, windowName, b, NULL); 
+		w = WindowFactory<>::create(BTW_PARAM, windowName, b, NULL); 
 		ValidateHWND(w); 
 		w->Expunge();
 		Window::RunGetMessageLoop();
@@ -106,15 +106,15 @@ namespace Factories
 
 		TCHAR* className = _T("constructorTestClass");
 		b = CreateSolidBrush(RGB(255,0,0));
-		w = CreateWnd(BTW_PARAM, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
+		w = WindowFactory<>::create(BTW_PARAM, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
 		BOOST_REQUIRE(w); 
 		w->Expunge();
 		Window::RunGetMessageLoop();
 		delete w;
 		
 		HBRUSH redBrush = CreateSolidBrush(RGB(255,0,0));
-		w = CreateWnd(BTW_PARAM, NULL); 
-		Window *child = CreateWnd(5, 5, 50, 50, _T("child"), redBrush, w);
+		w = WindowFactory<>::create(BTW_PARAM, NULL); 
+		Window *child = WindowFactory<>::create(5, 5, 50, 50, _T("child"), redBrush, w);
 		child->ForceRedraw();
 		ValidateHWND(child); 
 		w->Expunge();
@@ -122,7 +122,7 @@ namespace Factories
 		delete w;
 		delete child;
 		
-		w = CreateWnd(INIT_DLG_PARAM);
+		w = WindowFactory<>::create(INIT_DLG_PARAM);
 		ValidateHWND(w);
 		w->Expunge();
 		Window::RunGetMessageLoop();
@@ -395,21 +395,6 @@ CreateWinapiWindowUnitTest( GetClientRect, "GetClientRect" )
 
 #endif
 
-#ifdef test_messaging
-
-namespace TestMessaging
-{
-	CreateWinapiWindowUnitTest(TestMessaging, "Messaging")
-	{
-		WindowPtr w ( CreateWnd() );
-		ValidateHWND( w.get() );
-		w->Expunge();
-		Window::RunGetMessageLoop();
-	}
-}
-
-#endif
-
 #ifdef test_padding
 
 namespace PaddingTest
@@ -654,31 +639,36 @@ namespace DoubleBuffer
 
 						HFONT MaxFontToWindowSize(HFONT oldFont, HDC dc)
 						{		
-							// Suppose the HWND of the edit control is hWnd.
-							// Send WM_GETFONT message to obtain the font used in the control.
-							HFONT font_old = oldFont;
+							//HDC          hdc;
+							TEXTMETRIC   tm;
+							LOGFONT      LogFont;
 
-							// Get the LOGFONT object from font_old
-							LOGFONT pLogFont;
-							
-							if (! GetObject(font_old, sizeof(LOGFONT), &pLogFont) )
-								__asm int 13;
- 
-							pLogFont.lfHeight = ClientHeight() - 4;//-MulDiv(basePoints(), GetDeviceCaps(dc, LOGPIXELSY), 72); 
- 
-							// Create new Font depends on modified LOGFONT
-							HFONT font_new = ::CreateFontIndirect(&pLogFont);
+							//hdc = GetDC(Wnd());
 
-							if ( !GetObject(font_new, sizeof(LOGFONT), &pLogFont) )
-								__asm int 13;
+							// Set up the LogFont structure.
+		
+							// Make sure it fits in the grid.
+							LogFont.lfHeight = 24; // Allow for whitespace.
+		
+							LogFont.lfWidth = LogFont.lfEscapement = LogFont.lfOrientation =
+								LogFont.lfWeight = 0; // Set these guys to zero.
+		
+							LogFont.lfItalic = LogFont.lfUnderline = LogFont.lfStrikeOut = 
+								LogFont.lfOutPrecision = LogFont.lfClipPrecision =
+								LogFont.lfQuality = LogFont.lfPitchAndFamily = 0; // Set these guys to zero.
 
-							if ( !SelectObject(dc, font_new) )
-								__asm int 13;
-							TEXTMETRIC textInfo;
-							GetTextMetrics(dc, &textInfo);
+							// Let the facename and size define the font.
+							LogFont.lfCharSet = ANSI_CHARSET;
+							lstrcpy(LogFont.lfFaceName, L"Lucida Sans Unicode");
+		
+							// Create the font.
+							//if ( symbolFont )
+							//	DeleteObject(symbolFont);
+							HFONT symbolFont = CreateFontIndirect(&LogFont);
+							//HFONT hOldFont = (HFONT)SelectObject(dc, symbolFont);
 							// Set the font back to edit control
 							//::SendMessage(w, WM_SETFONT,(WPARAM)font_new,1);
-							return font_new;
+							return symbolFont;
 						}
 
 						void SetupDoubleBuffer(GDI * primaryGDI)
@@ -694,7 +684,8 @@ namespace DoubleBuffer
 							HFONT newFont = MaxFontToWindowSize((HFONT)GetCurrentObject(BackDC(), OBJ_FONT), BackDC() );
 							HFONT oldFont = (HFONT)SelectObject(BackDC(), newFont);
 							wout.SetCursorX(0); wout.SetCursorY(0);
-							wout << Wout::center << _T("Hello⇒⇒World");
+							wout << _T("Hello⇒⇒World");
+							//TextOut(BackDC(), 0, 0, L"Hello⇒⇒World", wcslen(L"Hello⇒⇒World"));
 							SelectObject(BackDC(), oldFont);
 							DeleteObject(newFont);
 						}
@@ -722,7 +713,7 @@ namespace DoubleBuffer
 					{
 						((Output*)&*output)->UpdateFrame();
 					}	
-				
+
 				};
 				class BotHalf : public WindowGDI
 				{
@@ -745,7 +736,7 @@ namespace DoubleBuffer
 				}
 				handleCreate()
 				{
-					topHalf.reset( ( new TopHalf() )->InitWnd(0, 0, ClientWidth(), ClientHeight()/2, _T("TopHalfClass"), _T("TopHalfWindow"), parent)->SetClassBrush(NBRUSH) );
+					topHalf.reset( ( new TopHalf() )->InitWnd(10, 0, ClientWidth() - 10, ClientHeight()/2, _T("TopHalfClass"), _T("TopHalfWindow"), parent)->SetClassBrush(NBRUSH) );
 					botHalf.reset( ( new BotHalf() )->InitWnd(0, ClientHeight()/2, ClientWidth(), ClientHeight()/2, _T("BopHalfClass"), _T("BotHalfWindow"), parent)->SetClassBrush(NBRUSH) );
 				}
 				void UpdateFrame()
@@ -842,15 +833,42 @@ namespace DoubleBuffer
 		}	
 	};
 
-	CreateWinapiWindowUnitTest( DoubleBufferTest, "Double Buffer" )
+	CreateUnitTest( DoubleBufferTest, "Double Buffer" )
 	{
 		WindowPtr parent( WindowFactory<DblBuffedWnd>::create() );
 		//parent->Expunge();
 		parent->RunPeekMessageLoop();
-		parent->UnregisterClass();
 	}
 }
 
+#endif
+
+#ifdef test_log_window
+
+namespace TestingLogWindow
+{
+	CreateUnitTest( LogWindowTest, "Log Window" )
+	{
+		WindowPtr parent( WindowFactory<LogWnd>::create(0, 0, 240, 600, NULL) );
+		((LogWnd*)&*parent)->Log(_T("Hello World!\r\nthe answer is %d"), 42);
+		parent->Expunge();
+		parent->RunPeekMessageLoop();
+	}
+}
+#endif
+
+#ifdef test_log_window
+
+namespace TestingLogWindow
+{
+	CreateUnitTest( LogWindowTest, "Log Window" )
+	{
+		WindowPtr parent( WindowFactory<LogWnd>::create(0, 0, 240, 600, NULL) );
+		((LogWnd*)&*parent)->Log(_T("Hello World!\r\nthe answer is %d"), 42);
+		parent->Expunge();
+		parent->RunPeekMessageLoop();
+	}
+}
 #endif
 
 #ifdef test_log_window

@@ -161,3 +161,8 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+real_window_test/window_tests.h
+UnicodeDebug/CL.read.1.tlog
+UnicodeDebug/CL.read.1.tlog
+*.tlog
+*.tlog

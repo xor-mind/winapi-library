@@ -1,7 +1,7 @@
 #ifndef  WINAPI_LOG_WND
 #define  WINAPI_LOG_WND
 
-#include "winapi_window.h"
+#include "window.h"
 #include <stdio.h>
 #include <stdarg.h>
 

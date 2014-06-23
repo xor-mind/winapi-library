@@ -1,7 +1,7 @@
 #ifndef SPLITTER_H
 #define SPLITTER_H
 
-#include "winapi_window.h"
+#include "window.h"
 
 typedef unsigned int uint;
 
