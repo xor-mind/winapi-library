@@ -12,9 +12,7 @@ int dyTwoWindows(Window* top, Window* bottom)
 	return bottom->yPos() - top->y1Pos();
 }
 
-float round(float f) {
-    return (f > 0.0f) ? floor(f + 0.5f) : ceil(f - 0.5f);
-}
+
 
 void Line (HDC dc, int x1, int y1, int x2, int y2)
 {

@@ -1,5 +1,6 @@
 #include "wout.h"
 #include "winapi_DataConversion.h"
+#include <vector>
 
 tstring Wout::delimiters[] = { _T("\\n"), _T("\\c") };
 
@@ -181,14 +182,16 @@ int Wout::GetTextHeight()
 	return textInfo.tmHeight;
 }
 
-int Wout::GetTextName()
+std::wstring Wout::GetFontName()
 {
-	GetTextMetrics(hDC, &textInfo);
-	return textInfo.
+	std::vector<wchar_t> buff(1024);
+	GetTextFace(hDC, 1024, &buff[0]);
+	return std::wstring( buff.begin(), buff.end() );
 }
 
 void Wout::SetTextHeight( int height ) 
 {	
+	// were deleting whatever new font we have created because we want to make a different new font.
 	if ( newFont ) {
 		DeleteObject( newFont );
 	}
@@ -198,21 +201,22 @@ void Wout::SetTextHeight( int height )
 	//}
 
 	LOGFONT      LogFont;
+	GetObject( GetStockObject(DEFAULT_GUI_FONT) , sizeof(LOGFONT), (LPSTR)&LogFont );
 	// Set up the LogFont structure.
 		
 	// Make sure it fits in the grid.
-	LogFont.lfHeight = height; // Allow for whitespace.
+	LogFont.lfHeight = 24;//-MulDiv(26, GetDeviceCaps(hDC, LOGPIXELSY), 72);; // Allow for whitespace.
 		
-	LogFont.lfWidth = LogFont.lfEscapement = LogFont.lfOrientation =
-		LogFont.lfWeight = 0; // Set these guys to zero.
+	//LogFont.lfWidth = LogFont.lfEscapement = LogFont.lfOrientation =
+	//	LogFont.lfWeight = 0; // Set these guys to zero.
 		
-	LogFont.lfItalic = LogFont.lfUnderline = LogFont.lfStrikeOut = 
-		LogFont.lfOutPrecision = LogFont.lfClipPrecision =
-		LogFont.lfQuality = LogFont.lfPitchAndFamily = 0; // Set these guys to zero.
+	//LogFont.lfItalic = LogFont.lfUnderline = LogFont.lfStrikeOut = 
+	//	LogFont.lfOutPrecision = LogFont.lfClipPrecision =
+	//	LogFont.lfQuality = LogFont.lfPitchAndFamily = 0; // Set these guys to zero.
 
 	// Let the facename and size define the font.
-	LogFont.lfCharSet = ANSI_CHARSET;
-	lstrcpy(LogFont.lfFaceName, L"Lucida Sans Unicode");
+	//LogFont.lfCharSet = ANSI_CHARSET;
+	//lstrcpy(LogFont.lfFaceName, L"Lucida Sans Unicode");
 		
 	// Create the font.
 	//if ( symbolFont )

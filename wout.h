@@ -46,7 +46,7 @@ public:
 	// information about text object
 	int GetAverageTextWidth();
 	int GetTextHeight();
-	TCHAR* GetTextName();
+	std::wstring GetFontName();
 	// OverLoaded Operators
 	Wout & operator << (const TCHAR *szText);
 	Wout & operator << (const tstring s);

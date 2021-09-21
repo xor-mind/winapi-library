@@ -3,3 +3,9 @@ Work on Window::Expunge so it it's not trying to Destroying Children window a re
 
 Factories.h
 Can refactor by creating a pure GdiObject class, and deleting the copy and paste code.
+
+----------------------------------------------------------------------------------------------
+
+Last working on: 
+
+writing a unit test for wout.

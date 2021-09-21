@@ -4,13 +4,13 @@
 #include <algorithm>  
 #include <iostream>
 
-#include "TestTracker.h"
-#include "resource.h"
+//#include "TestTracker.h"
+//#include "resource.h"
 
 #include "..\GdiObjectFactory.h"
 #include "..\winapi_error.h"
 #include "..\winapi_structures.h"
-#include "..\winapi_window.h"
+#include "..\window.h"
 
 #include <boost\assign\list_of.hpp> 
 #include <boost\assign\std\vector.hpp>
@@ -24,12 +24,12 @@ void ValidateHWND(Window* w);
 
 int dyTwoWindows(Window* top, Window* bottom);
 
-typedef struct BasicTestWindow : public TestTracker, public Window
+typedef struct BasicTestWindow : public Window
 { 
 	// creates a 400x300 window at (800,100) in screen coords. This is used for testing of the
 	// Window class which is an abstraction for a GUI.
 
-	BasicTestWindow(TCHAR* const testName) : TestTracker(testName) { 
+	BasicTestWindow(TCHAR* const testName) { 
 		//InitWindow(testName);	
 	}
 	virtual ~BasicTestWindow() {}
@@ -60,7 +60,7 @@ typedef struct BasicTestWindow : public TestTracker, public Window
 	virtual void Create() {}
 	virtual void AfterCreate()
 	{
-		RunTest();
+		//RunTest();
 	}
 
 	// default window dimensions
@@ -68,9 +68,9 @@ typedef struct BasicTestWindow : public TestTracker, public Window
 
 } BTW;
 
-#define AllGood say "\n\nWe looking good abomb?" stop chill
+//#define AllGood say "\n\nWe looking good abomb?" stop chill
 
-float round(float f);
+
 
 void Line (HDC dc, int x1, int y1, int x2, int y2);
 

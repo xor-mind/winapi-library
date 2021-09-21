@@ -1,0 +1,1 @@
+C:\code\cpp\lib\winapi\UnicodeDebug\winapi_MDdu.lib

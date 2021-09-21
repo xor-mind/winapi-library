@@ -166,3 +166,5 @@ UnicodeDebug/CL.read.1.tlog
 UnicodeDebug/CL.read.1.tlog
 *.tlog
 *.tlog
+*.db
+*.opendb

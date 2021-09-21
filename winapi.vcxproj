@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -28,27 +28,27 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -107,7 +107,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\c\boost_1_53_0;C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\code\cpp\lib\boost;C:\code\cpp\lib\console;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -116,8 +116,8 @@
     <Lib>
       <SubSystem>
       </SubSystem>
-      <AdditionalDependencies>Shlwapi.lib;abomb_console.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Shlwapi.lib;console.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\code\cpp\lib\console\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -177,11 +177,11 @@
     <ClCompile Include="winapi_structures.cpp" />
     <ClCompile Include="winapi_file.cpp" />
     <ClCompile Include="winapi_error.cpp" />
-    <ClCompile Include="winapi_gdi.cpp" />
+    <ClCompile Include="gdi.cpp" />
     <ClCompile Include="winapi_RAII.cpp" />
     <ClCompile Include="winapi_shell.cpp" />
     <ClCompile Include="winapi_window.cpp" />
-    <ClCompile Include="winapi_wout.cpp" />
+    <ClCompile Include="wout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2DMath.h" />
@@ -190,24 +190,25 @@
     <ClInclude Include="color.h" />
     <ClInclude Include="GdiObjectFactory.h" />
     <ClInclude Include="IWindow.h" />
+    <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="Prerequisites.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="splitter.h" />
     <ClInclude Include="winapi_DataConversion.h" />
-    <ClInclude Include="winapi_drag.h" />
+    <ClInclude Include="drag.h" />
     <ClInclude Include="winapi_GUI.h" />
     <ClInclude Include="winapi_log_wnd.h" />
     <ClInclude Include="winapi_structures.h" />
     <ClInclude Include="winapi_thread.h" />
-    <ClInclude Include="winapi_timer.h" />
+    <ClInclude Include="high_performance_timer.h" />
     <ClInclude Include="winapi_file.h" />
-    <ClInclude Include="winapi_gdi.h" />
+    <ClInclude Include="gdi.h" />
     <ClInclude Include="winapi_library.h" />
     <ClInclude Include="winapi_error.h" />
     <ClInclude Include="winapi_RAII.h" />
     <ClInclude Include="winapi_shell.h" />
-    <ClInclude Include="winapi_window.h" />
-    <ClInclude Include="winapi_wout.h" />
+    <ClInclude Include="window.h" />
+    <ClInclude Include="wout.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="todo.txt" />

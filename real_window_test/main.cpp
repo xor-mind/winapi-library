@@ -17,13 +17,13 @@ boost::function<void (Window*)>  fpForceRedraw = &Window::ForceRedraw;
 #define CreateRunDestroyTest  KWindow w; w.Init(); w.Expunge(); Window::RunGetMessageLoop();
 #define useCwDefaults		  CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
 
-//#define test_constructors_and_destructors
+#define test_constructors_and_destructors
 //#define test_position_and_dimension
 //#define test_messaging
 //#define test_padding
 //#define test_useful_methods
 //#define test_window_distance_methods
-#define test_double_buffer
+//#define test_double_buffer
 //#define test_log_window
 //#define test_gdi_draw
 
@@ -33,7 +33,7 @@ namespace InitiationMethods
 {
 	void TestChildWithinChild()
 	{
-		BrushFactory bf;
+	/*	BrushFactory bf;
 		WindowPtr parent( CreateWnd(BTW_PARAM,NULL) ),
 			      child ( CreateWnd(0, 0, 200, 200, _T("child"), bf.blue(), parent.get()) ),
 			      child1( CreateWnd(0,0, 100, 100, _T("child1"), bf.red(), child.get()) );
@@ -43,10 +43,10 @@ namespace InitiationMethods
 		std::for_each(wl.begin(), wl.end(), fpForceRedraw);
 		std::for_each(wl.begin(), wl.end(), ValidateHWND);
 		parent->Expunge();
-		Window::RunGetMessageLoop();
+		Window::RunGetMessageLoop();*/
 	}
 
-	CreateWinapiWindowUnitTest(IntitationMethods, "Initiation Methods")
+	BOOST_AUTO_TEST_CASE(foobar)
 	{
 		Window* w = new Window();  
 
@@ -56,7 +56,7 @@ namespace InitiationMethods
 		ValidateHWND(w);
 		w->Expunge();
 		Window::RunGetMessageLoop();
-
+		/*
 		w->InitWnd(BTW_PARAM, TestName(), NULL);
 		ValidateHWND(w);
 		w->Expunge();
@@ -71,64 +71,64 @@ namespace InitiationMethods
 		w->InitWnd(INIT_DLG_PARAM);
 		ValidateHWND(w);
 		w->Expunge();
-		Window::RunGetMessageLoop();
+		Window::RunGetMessageLoop();*/
 
 		delete w;
 
-		TestChildWithinChild();
+		//TestChildWithinChild();
 	}	
 }
 
-namespace Factories
-{
-	CreateWinapiWindowUnitTest(Factories, "Factories") 
-	{
-		Window* w = WindowFactory<>::create(BTW_PARAM, NULL); 
-		ValidateHWND(w); 
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-
-		w = WindowFactory<>::create(BTW_PARAM, CS_OWNDC | CS_DBLCLKS 
-			| CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, NULL); 
-		ValidateHWND(w); 
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-
-		TCHAR* windowName = _T("constructorTest");
-		HBRUSH b = CreateSolidBrush(RGB(255,0,0));
-		w = WindowFactory<>::create(BTW_PARAM, windowName, b, NULL); 
-		ValidateHWND(w); 
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-
-		TCHAR* className = _T("constructorTestClass");
-		b = CreateSolidBrush(RGB(255,0,0));
-		w = WindowFactory<>::create(BTW_PARAM, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
-		BOOST_REQUIRE(w); 
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-		
-		HBRUSH redBrush = CreateSolidBrush(RGB(255,0,0));
-		w = WindowFactory<>::create(BTW_PARAM, NULL); 
-		Window *child = WindowFactory<>::create(5, 5, 50, 50, _T("child"), redBrush, w);
-		child->ForceRedraw();
-		ValidateHWND(child); 
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-		delete child;
-		
-		w = WindowFactory<>::create(INIT_DLG_PARAM);
-		ValidateHWND(w);
-		w->Expunge();
-		Window::RunGetMessageLoop();
-		delete w;
-	}
-}
+//namespace Factories
+//{
+//	CreateWinapiWindowUnitTest(Factories, "Factories") 
+//	{
+//		Window* w = WindowFactory<>::create(BTW_PARAM, NULL); 
+//		ValidateHWND(w); 
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//
+//		w = WindowFactory<>::create(BTW_PARAM, CS_OWNDC | CS_DBLCLKS 
+//			| CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, NULL); 
+//		ValidateHWND(w); 
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//
+//		TCHAR* windowName = _T("constructorTest");
+//		HBRUSH b = CreateSolidBrush(RGB(255,0,0));
+//		w = WindowFactory<>::create(BTW_PARAM, windowName, b, NULL); 
+//		ValidateHWND(w); 
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//
+//		TCHAR* className = _T("constructorTestClass");
+//		b = CreateSolidBrush(RGB(255,0,0));
+//		w = WindowFactory<>::create(BTW_PARAM, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
+//		BOOST_REQUIRE(w); 
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//		
+//		HBRUSH redBrush = CreateSolidBrush(RGB(255,0,0));
+//		w = WindowFactory<>::create(BTW_PARAM, NULL); 
+//		Window *child = WindowFactory<>::create(5, 5, 50, 50, _T("child"), redBrush, w);
+//		child->ForceRedraw();
+//		ValidateHWND(child); 
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//		delete child;
+//		
+//		w = WindowFactory<>::create(INIT_DLG_PARAM);
+//		ValidateHWND(w);
+//		w->Expunge();
+//		Window::RunGetMessageLoop();
+//		delete w;
+//	}
+//}
 
 #endif
 

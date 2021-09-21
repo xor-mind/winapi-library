@@ -1,24 +1,16 @@
-﻿Build started 5/9/2014 3:49:33 AM.
-     1>Project "C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\winapi.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\c\boost_1_53_0 /IC:\Users\abombthecoder\Documents\code\cpp\library\abomb_console /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"UnicodeDebug\\" /Fd"UnicodeDebug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt winapi_window.cpp
-         winapi_window.cpp
-       Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib" Shlwapi.lib abomb_console.lib /LIBPATH:C:\Users\abombthecoder\Documents\code\cpp\library\abomb_console\Debug /NOLOGO UnicodeDebug\2DMath.obj
-         UnicodeDebug\Bitmap.obj
-         UnicodeDebug\splitter.obj
-         UnicodeDebug\winapi_GUI.obj
-         UnicodeDebug\winapi_structures.obj
-         UnicodeDebug\winapi_file.obj
-         UnicodeDebug\winapi_error.obj
-         UnicodeDebug\winapi_gdi.obj
-         UnicodeDebug\winapi_RAII.obj
-         UnicodeDebug\winapi_shell.obj
-         UnicodeDebug\winapi_window.obj
-         UnicodeDebug\winapi_wout.obj
-         winapi.vcxproj -> C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\UnicodeDebug\winapi_MDdu.lib
-     1>Done Building Project "C:\Users\abombthecoder\Documents\code\cpp\library\winapi-library\winapi.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.95
+﻿  2DMath.cpp
+  Bitmap.cpp
+  splitter.cpp
+  winapi_GUI.cpp
+  winapi_structures.cpp
+  winapi_file.cpp
+  winapi_error.cpp
+  gdi.cpp
+  winapi_RAII.cpp
+  winapi_shell.cpp
+  winapi_window.cpp
+C:\code\cpp\lib\winapi\winapi_window.cpp(133,20): warning C4838: conversion from 'uint' to 'LONG' requires a narrowing conversion
+C:\code\cpp\lib\winapi\winapi_window.cpp(133,27): warning C4838: conversion from 'uint' to 'LONG' requires a narrowing conversion
+  wout.cpp
+  Generating Code...
+  winapi.vcxproj -> C:\code\cpp\lib\winapi\UnicodeDebug\winapi_MDdu.lib
