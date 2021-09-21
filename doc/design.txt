@@ -1,0 +1,18 @@
+Design, Problems, Avoidances:
+
+
+
+Problems winapi should solve:
+
+- abstract the win32 api and make using it easier. 
+- easily create a window and start doing stuff. 
+- to help faciliate the visual demonstration of science and programming.
+
+Problems winapi has no buisness with:
+
+- customizable windows. The purpose of winapi is to keep things simple and easy. If I want
+heavy customizing, I need to just use the raw win32 api. less is more.
+
+- styling. this api should be about getting a window out quick and doing GDI/3d api;
+this isn't a CSS replacement. If I want style, I need to get be getting paid. winapi is to help
+me demostrate computer science, not sell widgets on the world wide web.

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winapi", "winapi.vcxproj", "{CBBA12F2-FD33-4B39-91EC-B16A994F5AF7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HighPerformanceTimer", "winapi_test\winapi_test.vcxproj", "{D0E50F47-8D2B-483C-ABFC-BB6F19447F5D}"
@@ -19,6 +21,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WOUT", "WOUT\WOUT.vcxproj",
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDIPlus", "..\GDIPlus\GDIPlus.vcxproj", "{B2243A23-C973-4120-8C08-5F2E128C6D7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{ABE38E39-C9DB-40B5-83CF-ECC3CAB765B0}"
+	ProjectSection(SolutionItems) = preProject
+		doc\design.txt = doc\design.txt
+		doc\todo.txt = doc\todo.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +85,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7D79A76A-0F3B-47C7-BEBD-A15D24554B9B} = {2710A987-5D65-4CE8-A96A-BD2B810840E4}
 		{D0E50F47-8D2B-483C-ABFC-BB6F19447F5D} = {2710A987-5D65-4CE8-A96A-BD2B810840E4}
+		{7D79A76A-0F3B-47C7-BEBD-A15D24554B9B} = {2710A987-5D65-4CE8-A96A-BD2B810840E4}
+		{E6685D2B-4B54-41F7-AE92-56AF076E924A} = {DFB3CE27-D97B-49B8-9F56-97826B935783}
 		{1B282F87-9123-4A08-A590-04CC8191ED71} = {2710A987-5D65-4CE8-A96A-BD2B810840E4}
 		{B2243A23-C973-4120-8C08-5F2E128C6D7C} = {2710A987-5D65-4CE8-A96A-BD2B810840E4}
-		{E6685D2B-4B54-41F7-AE92-56AF076E924A} = {DFB3CE27-D97B-49B8-9F56-97826B935783}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6165E765-9723-4519-BECA-138FD0BB4395}
 	EndGlobalSection
 EndGlobal

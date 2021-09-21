@@ -3,6 +3,7 @@
 
 #include "Prerequisites.h"
 
+/* ad_todo: Why do I have an interface class? What is the need?*/
 class IWindow
 {
 public:

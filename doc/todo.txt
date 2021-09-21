@@ -1,0 +1,3 @@
+examples:
+
+1) get window up
