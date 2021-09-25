@@ -34,7 +34,7 @@ namespace InitiationMethods
 	void TestChildWithinChild()
 	{
 	/*	BrushFactory bf;
-		WindowPtr parent( CreateWnd(BTW_PARAM,NULL) ),
+		WindowPtr parent( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height,NULL) ),
 			      child ( CreateWnd(0, 0, 200, 200, _T("child"), bf.blue(), parent.get()) ),
 			      child1( CreateWnd(0,0, 100, 100, _T("child1"), bf.red(), child.get()) );
 			
@@ -46,24 +46,27 @@ namespace InitiationMethods
 		Window::RunGetMessageLoop();*/
 	}
 
-	BOOST_AUTO_TEST_CASE(foobar)
+	BOOST_AUTO_TEST_CASE(RefactorTest)
 	{
 		Window* w = new Window();  
 
 		BOOST_REQUIRE(w);
 
-		w->InitWnd(BTW_PARAM, NULL);
+		// BTW is the BasicTestWindow class, which has default positions and dimensions for aribtrary window testing.
+		// Becauese this test is about testing construction/destruction, we'll just be using a naked Window object that has no default properties.
+		// But since the InitWnd function still needs dimensions, we'll just use our basic test window's static public members.
+		w->InitWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL);
 		ValidateHWND(w);
 		w->Expunge();
 		Window::RunGetMessageLoop();
 		/*
-		w->InitWnd(BTW_PARAM, TestName(), NULL);
+		w->InitWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, TestName(), NULL);
 		ValidateHWND(w);
 		w->Expunge();
 		Window::RunGetMessageLoop();
 
 		w->InitWnd(NULL, 0, 0, 0, TestName(), CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, 
-						WS_OVERLAPPEDWINDOW | WS_VISIBLE, BTW_PARAM);
+						WS_OVERLAPPEDWINDOW | WS_VISIBLE, BTW::xpos, BTW::ypos, BTW::width, BTW::height);
 		ValidateHWND(w);
 		w->Expunge();
 		Window::RunGetMessageLoop();
@@ -83,13 +86,13 @@ namespace InitiationMethods
 //{
 //	CreateWinapiWindowUnitTest(Factories, "Factories") 
 //	{
-//		Window* w = WindowFactory<>::create(BTW_PARAM, NULL); 
+//		Window* w = WindowFactory<>::create(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL); 
 //		ValidateHWND(w); 
 //		w->Expunge();
 //		Window::RunGetMessageLoop();
 //		delete w;
 //
-//		w = WindowFactory<>::create(BTW_PARAM, CS_OWNDC | CS_DBLCLKS 
+//		w = WindowFactory<>::create(BTW::xpos, BTW::ypos, BTW::width, BTW::height, CS_OWNDC | CS_DBLCLKS 
 //			| CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, NULL); 
 //		ValidateHWND(w); 
 //		w->Expunge();
@@ -98,7 +101,7 @@ namespace InitiationMethods
 //
 //		TCHAR* windowName = _T("constructorTest");
 //		HBRUSH b = CreateSolidBrush(RGB(255,0,0));
-//		w = WindowFactory<>::create(BTW_PARAM, windowName, b, NULL); 
+//		w = WindowFactory<>::create(BTW::xpos, BTW::ypos, BTW::width, BTW::height, windowName, b, NULL); 
 //		ValidateHWND(w); 
 //		w->Expunge();
 //		Window::RunGetMessageLoop();
@@ -106,14 +109,14 @@ namespace InitiationMethods
 //
 //		TCHAR* className = _T("constructorTestClass");
 //		b = CreateSolidBrush(RGB(255,0,0));
-//		w = WindowFactory<>::create(BTW_PARAM, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
+//		w = WindowFactory<>::create(BTW::xpos, BTW::ypos, BTW::width, BTW::height, className, windowName, CS_OWNDC | CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW, WS_OVERLAPPEDWINDOW | WS_VISIBLE, b, NULL); 
 //		BOOST_REQUIRE(w); 
 //		w->Expunge();
 //		Window::RunGetMessageLoop();
 //		delete w;
 //		
 //		HBRUSH redBrush = CreateSolidBrush(RGB(255,0,0));
-//		w = WindowFactory<>::create(BTW_PARAM, NULL); 
+//		w = WindowFactory<>::create(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL); 
 //		Window *child = WindowFactory<>::create(5, 5, 50, 50, _T("child"), redBrush, w);
 //		child->ForceRedraw();
 //		ValidateHWND(child); 
@@ -155,7 +158,7 @@ namespace WindowDimensions
 {
 	void TestScreenRect()
 	{
-		WindowPtr w( CreateWnd(BTW_PARAM, NULL)->ProcessPostQuitMessage(false) );
+		WindowPtr w( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL)->ProcessPostQuitMessage(false) );
 		RECT r = { BTW::xpos, BTW::ypos, BTW::xpos + BTW::width, BTW::ypos + BTW::height };
 		BOOST_REQUIRE_EQUAL(r, w.get()->ScreenRect());	
 		w->Expunge();
@@ -192,7 +195,7 @@ namespace WindowDimensionsWRtoParent
 
 		boost::scoped_ptr<Window> p, child, child1;
 
-		p.reset( CreateWnd(BTW_PARAM, NULL) );
+		p.reset( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL) );
 
 		child.reset( CreateWnd(childRect.left, childRect.top, childRect.right, 
 					childRect.bottom, _T("childClass"), _T(""), 0, 0, bf.blue(), p.get() ) );
@@ -249,7 +252,7 @@ namespace WindowPositioning
 	CreateWinapiWindowUnitTest(WindowPositioning, "Window Positioning")
 	{
 		// test moving window around the screen
-		boost::scoped_ptr<Window> parent( CreateWnd(BTW_PARAM, NULL) );
+		boost::scoped_ptr<Window> parent( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, NULL) );
 		BOOST_REQUIRE_EQUAL(BTW::width, parent->Width());
 		BOOST_REQUIRE_EQUAL(BTW::width, parent->Width());
 		BOOST_REQUIRE_EQUAL(BTW::xpos + BTW::width, parent->x1Pos());
@@ -338,7 +341,7 @@ namespace CenterWindow
 	{
 		BrushFactory bf;
 		// creating a parent window with 4 child windows. going to center childchild between child1 and child2. 
-		WindowPtr parent( CreateWnd(BTW_PARAM, _T("parent"), bf.blue(), NULL) ),
+		WindowPtr parent( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, _T("parent"), bf.blue(), NULL) ),
 					child ( CreateWnd( 0, 0, BTW::width/2, BTW::height, _T("child"), bf.orange(), parent.get() ) ),
 					childchild( CreateWnd( 0, 0, 50, 50, _T("childchild"), bf.pink(), child.get() ) ),
 					child1( CreateWnd( BTW::width/2, 0, 50, 50, _T("child1"), bf.yellow(), parent.get() ) ),
@@ -402,7 +405,7 @@ namespace PaddingTest
 	void TestParentAndChild()
 	{
 		BrushFactory bf;
-		WindowPtr w ( CreateWnd(BTW_PARAM, Padding(0.1f, 0.15f, 0.1f, 0.15f), NULL )  );
+		WindowPtr w ( CreateWnd(BTW::xpos, BTW::ypos, BTW::width, BTW::height, Padding(0.1f, 0.15f, 0.1f, 0.15f), NULL )  );
 			
 		int x  = w->ClientWidth(),
 			x1 = BTW::width - w->dxNonClientAndClient()*2;

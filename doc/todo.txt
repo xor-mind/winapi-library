@@ -1,3 +1,16 @@
-examples:
+09/25/2021
+1 - major refactor happening now. 
+I forget how the API works. By commenting most features and steadily unrolling the comments, I'll 
+get the gist of the library. 
 
-1) get window up
+I'll use BOOST_AUTO_TEST_CASE(RefactorTest) as a function to test the refactor. Hopefully this will go
+quick.
+
+
+1.1 Get rid of the macros. 
+
+Begin at windows.h and from the top of the file, comment out one macro at a time. After the program breaks.
+Fix it. after enough work, push; repeat. 
+
+9/22/2021
+1) test child like behavior. the expunge function is confusing as fuck.

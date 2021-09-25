@@ -1,0 +1,64 @@
+09/21/2021
+(3)
+from windows_tests.h line 81:
+#define     BTW_PARAM				BTW::xpos, BTW::ypos, BTW::width, BTW::height
+
+refactoring out macros that were designed to make writing code faster. (it just makes understanding
+technical code super difficult as you have to create an instance in your mind of what the code
+actually is; which is okay if that's all you do, but if you're coming back 10 years later...)
+
+(2) getting rid of all cpp script macros. this was another time, my design rationale for scripts 
+was to make the act of coding as easy as possible. I've since realized it's not the language, 
+it's the programmer. 
+
+//#define AllGood say "\n\nWe looking good abomb?" stop chill 
+
+(1) I'm removing the following code that tried to make CSS style windows. It's not a bad idea, but 
+I don't have time right now to work on CSS like styling for the windows API so I'm extricating the
+code for now.
+
+// this is like css's X px or X %, you can use GuiMeasurements as a way to talk about lengths 
+// while styling our windows. Maybe we want the padding to be 10% of the widfth of the window, 
+// maybe want to use dialog units (DU) or maybe we want talk about pixel lengths.
+//class Margin
+//{
+//public:
+//	
+//	Margin( Window * w ) : w(w) {}
+//	 ~Margin() {}
+//	 void ApplyMargins(int & x, int & y, int & width, int & height) = 0;
+//	Window * w; // the window associated with this Margin object
+//};
+//
+//class MarginPercent : public Margin
+//{
+//public:
+//	MarginPercent(Window * w) : Margin(w) { left = top = right = bot = 0.0f; }
+//	
+//	MarginPercent(float left, float top, float right, float bot, Window * w) 
+//	: Margin(w), left(left), top(top), right(right), bot(bot) {  }
+//	
+//	void ApplyMargins(int & x, int & y, int & width, int & height)
+//	{
+//		// this code is experimentation, I still need to better define and understand the concept of "margins".
+//		//RECT r;
+//		//GetClientRect(w->hParent, &r); // get width and height of containing rect
+//
+//		//x += (int)(left  * r.right);
+//		//x -= (int)(right * r.right);
+//
+//		//y += (int)(top * r.bottom);
+//		//y -= (int)(bot * r.bottom);
+//
+//		//if ( isWidthAndHeightProportionalToMargins )
+//		//{
+//		//	width -= (int)(left  * r.right);
+//		//	width += (int)(right * r.right);
+//		//
+//		//	height -= (int)(top * r.bottom);
+//		//	height += (int)(bot * r.bottom);
+//		//}
+//	}
+//	
+//	float left, top, right, bot;
+//};

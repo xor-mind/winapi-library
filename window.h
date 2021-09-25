@@ -21,11 +21,11 @@ an MFC CWindow. All Windows, including child Windows should be managed with smar
 
 #pragma warning(disable:4003) // removes warning about using macros with empty parans, useful to take advantage of syntx such as WND_PROC_DECL(); 
  
-#define WIN_MAIN              int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
-#define WND_PROC_PARAM		  HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
-#define WND_PROC_DECL(x)      LRESULT CALLBACK x##WndProc(WND_PROC_PARAM)
-#define DEF_WND_PROC          DefWindowProc(hWnd, msg, wParam, lParam)
-#define DLG_PROC_DECL(x)      BOOL CALLBACK x##DlgProc(WND_PROC_PARAM)
+//#define WIN_MAIN              int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+//#define WND_PROC_PARAM		  HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
+//#define WND_PROC_DECL(x)      LRESULT CALLBACK x##WndProc(WND_PROC_PARAM)
+//#define DEF_WND_PROC          DefWindowProc(hWnd, msg, wParam, lParam)
+//#define DLG_PROC_DECL(x)      BOOL CALLBACK x##DlgProc(WND_PROC_PARAM)
 #define WPD					  WND_PROC_DECL
 #define DPD                   DLG_PROC_DECL
 #define DWP					  DEF_WND_PROC
@@ -248,7 +248,7 @@ public:
 	Window * SetWndAndParentAndSubclass(HWND hWnd, Window *parent) 
 	{
 		SetWndAndParent(hWnd, parent); 
-		oldWndProc = (WNDPROC)SetWindowLongPtr (Wnd(), GWLP_WNDPROC, (LONG_PTR)HandlerWndProc);
+		oldWndProc = (WNDPROC)SetWindowLongPtr (Wnd(), GWLP_WNDPROC, (LONG_PTR)WndProcHandler);
 		
 		return this; 
 	} 
@@ -289,10 +289,10 @@ public:
 	int RunPeekMessageLoop();
 	virtual void PeekMessageLoop() { };
 	
-	static  WND_PROC_DECL(Handler);
-	static  DLG_PROC_DECL(Handler);
-	virtual WND_PROC_DECL();
-	virtual DLG_PROC_DECL();
+	static  LRESULT CALLBACK WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static  BOOL CALLBACK DlgProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	virtual  LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	virtual  BOOL CALLBACK DlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	Window*  parent;
 	WindowList children;
@@ -478,54 +478,6 @@ struct WindowFactory
 
 	private: WindowFactory() {} // singleton mode = ON
 };
-	
-
-//class Margin
-//{
-//public:
-//	
-//	Margin( Window * w ) : w(w) {}
-//	 ~Margin() {}
-//	 void ApplyMargins(int & x, int & y, int & width, int & height) = 0;
-//	Window * w; // the window associated with this Margin object
-//};
-//
-//class MarginPercent : public Margin
-//{
-//public:
-//	MarginPercent(Window * w) : Margin(w) { left = top = right = bot = 0.0f; }
-//	
-//	MarginPercent(float left, float top, float right, float bot, Window * w) 
-//	: Margin(w), left(left), top(top), right(right), bot(bot) {  }
-//	
-//	void ApplyMargins(int & x, int & y, int & width, int & height)
-//	{
-//		// this code is experimentation, I still need to better define and understand the concept of "margins".
-//		//RECT r;
-//		//GetClientRect(w->hParent, &r); // get width and height of containing rect
-//
-//		//x += (int)(left  * r.right);
-//		//x -= (int)(right * r.right);
-//
-//		//y += (int)(top * r.bottom);
-//		//y -= (int)(bot * r.bottom);
-//
-//		//if ( isWidthAndHeightProportionalToMargins )
-//		//{
-//		//	width -= (int)(left  * r.right);
-//		//	width += (int)(right * r.right);
-//		//
-//		//	height -= (int)(top * r.bottom);
-//		//	height += (int)(bot * r.bottom);
-//		//}
-//	}
-//	
-//	float left, top, right, bot;
-//};
-
-// this is like css's X px or X %, you can use GuiMeasurements as a way to talk about lengths 
-// while styling our windows. Maybe we want the padding to be 10% of the widfth of the window, 
-// maybe want to use dialog units (DU) or maybe we want talk about pixel lengths.
 
 struct TransparentWnd : public Window 
 {
@@ -553,7 +505,7 @@ struct TransparentWnd : public Window
 		SelectObject(dc, hbrOld);
 	}
 
-	WND_PROC_DECL()
+	LRESULT CALLBACK WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 
@@ -594,7 +546,7 @@ struct TransparentWnd : public Window
 		//	return TRUE; 
 		//}
 
-		return DEF_WND_PROC;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 	void HighlightWindow(bool hilightWnd) { this->hilightWnd = hilightWnd; }
 	bool hilightWnd;

@@ -68,10 +68,6 @@ typedef struct BasicTestWindow : public Window
 
 } BTW;
 
-//#define AllGood say "\n\nWe looking good abomb?" stop chill
-
-
-
 void Line (HDC dc, int x1, int y1, int x2, int y2);
 
 class TTK // test tool kit
@@ -81,7 +77,8 @@ protected:
 	PenFactory   pf;
 };
 
-#define     BTW_PARAM				BTW::xpos, BTW::ypos, BTW::width, BTW::height
+// BTW : "Basic Test Window"
+
 #define     AppInstance				GetModuleHandle(NULL)
 #define		INIT_DLG_PARAM			NULL, AppInstance, MAKEINTRESOURCE(IDD_MAINDLG)
 #define     S_VAR(x, y, ...)        static x& y() { static x s_##y = __VA_ARGS__; return s_##y; }

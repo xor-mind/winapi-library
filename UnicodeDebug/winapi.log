@@ -1,16 +1,2 @@
-﻿  2DMath.cpp
-  Bitmap.cpp
-  splitter.cpp
-  winapi_GUI.cpp
-  winapi_structures.cpp
-  winapi_file.cpp
-  winapi_error.cpp
-  gdi.cpp
-  winapi_RAII.cpp
-  winapi_shell.cpp
-  winapi_window.cpp
-C:\code\cpp\lib\winapi\winapi_window.cpp(133,20): warning C4838: conversion from 'uint' to 'LONG' requires a narrowing conversion
-C:\code\cpp\lib\winapi\winapi_window.cpp(133,27): warning C4838: conversion from 'uint' to 'LONG' requires a narrowing conversion
-  wout.cpp
-  Generating Code...
+﻿  winapi_window.cpp
   winapi.vcxproj -> C:\code\cpp\lib\winapi\UnicodeDebug\winapi_MDdu.lib

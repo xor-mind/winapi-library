@@ -8,7 +8,7 @@ void Line (HDC dc, int x1, int y1, int x2, int y2)
 	LineTo (dc, x2, y2);
 }
 
-WND_PROC_DECL(Splitter::)
+LRESULT CALLBACK Splitter::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch ( msg )
 	{
@@ -19,7 +19,7 @@ WND_PROC_DECL(Splitter::)
 		
 		default: break;
 	}
-	return DEF_WND_PROC;
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 void       Splitter::WM_CaptureChanged()

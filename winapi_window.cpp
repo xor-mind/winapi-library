@@ -29,11 +29,11 @@ TCHAR* const Window::defaultChildClassName   = _T("winapiChildWindowClass");
  
 Window::Window()
 {
-
+	// Keep track of this object in a list by inserting a reference to this object.
+	// By trackingthe hWnd property of Object, the generic callback handler 
+	// can determine whether this object(window) is being requested by a callback operation.
+	// this is part of the secret of how we 'objectify' windows, by tracking and using the window's hWnd. 
 	
-	// Keep track of this object in a static list by inserting in the list a reference to this object.
-	// By tracking the Object or specifically the hWnd property of Object, the generic callback handler 
-	// can determine whether this object is being requested by a callback operation.
 	windowList.push_back(this); 
 
 }
@@ -130,14 +130,15 @@ Window * Window::InitAdjustedWnd( int x, int y, uint width, uint height, IWindow
 		t2 = Window::defaultChildWindowStyle,
 		t3 = HasParent(WindowStyle),
 		t4 = WS_OVERLAPPEDWINDOW;  // this code is diaganostic for the time being
-	RECT rc = { 0, 0, width, height };
+	RECT rc = { 0, 0, (LONG)width, (LONG)height };
 	AdjustWindowRect( &rc,  HasParent(WindowStyle), FALSE);
 	InitWnd(x, y, rc.right - rc.left, rc.bottom - rc.top, NULL)->CenterWrtParent(); 
 	return this;
 }
 
-WND_PROC_DECL(Window::Handler)
+LRESULT CALLBACK Window::WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	// ad_todo why is this needed? explain it
 	if (currentlyCreatedWindow)
 	{	
 		currentlyCreatedWindow->hWnd = hWnd;
@@ -153,10 +154,10 @@ WND_PROC_DECL(Window::Handler)
 		}
 	}
 
-	return DEF_WND_PROC;
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-DLG_PROC_DECL(Window::Handler)
+BOOL CALLBACK Window::DlgProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (currentlyCreatedWindow)
 	{
@@ -190,7 +191,7 @@ Window * Window::InitWnd(IWindow* parent, HMENU menu, HBRUSH backgroundBrush, TC
 	}
 	RtlZeroMemory(&wc, sizeof(wc));
 	wc.style         = classStyle;
-	wc.lpfnWndProc   = HandlerWndProc;//WndProcHandler;
+	wc.lpfnWndProc   = WndProcHandler;//WndProcHandler;
 	//m_wc.cbClsExtra    = 0;
 	//m_wc.cbWndExtra    = 0;
 	//m_wc.hIconSm       = NULL;
@@ -239,7 +240,7 @@ Window * Window::InitWnd(IWindow* parent, HINSTANCE hInstance, LPCTSTR lpTemplat
 
 	currentlyCreatedWindow = this; // let the callback wndproc know a CreateDialog funtion was just called
 
-	SetWnd(CreateDialog(hInstance, lpTemplate, hParent, Window::HandlerDlgProc));
+	SetWnd(CreateDialog(hInstance, lpTemplate, hParent, Window::DlgProcHandler));
 
 	currentlyCreatedWindow = NULL; // clear the CreateDialog flag
 
@@ -283,14 +284,14 @@ void Window::SetWndClassName(const tstring& name)
 	_tcscpy_s(className, _countof(className), name.c_str());
 }
 
-WND_PROC_DECL(Window::)
+LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	handleDefaultMsgs
 
-	return DEF_WND_PROC; 
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-DLG_PROC_DECL(Window::) 
+BOOL CALLBACK Window::DlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	handleDefaultMsgs
 
@@ -515,7 +516,7 @@ int Window::RunGetMessageLoop()
 	{
 		size_t i=0;
 
-		for (it =Window::windowList.begin(); it != Window::windowList.end(); ++it)
+		for (it = Window::windowList.begin(); it != Window::windowList.end(); ++it)
 		{
 			if (IsDialogMessage((*it)->Wnd(), &message) > 0)
 			{

@@ -14,7 +14,7 @@ protected:
 	int	     dragStartX, dragStartY, dragX, dragY;
 	HPEN     splitPen;
 
-	virtual      WND_PROC_DECL();
+	virtual      LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	virtual void WM_LButtonDown(POINTS pt);
 	virtual void WM_LButtonUp(POINTS pt);
 	virtual void WM_LButtonDrag(POINTS pt);
