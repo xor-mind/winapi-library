@@ -1,6 +1,9 @@
 Design, Problems, Avoidances:
 
+About:
 
+This is my personal systems library for windows. It abstracts the win32 api and organizes it to my liking. 
+It's a personal project that I use both in buisness, life and education. I do try and employ best programming practices as I learn them.
 
 Problems winapi should solve:
 

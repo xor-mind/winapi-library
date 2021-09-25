@@ -1,2 +1,5 @@
-﻿  winapi_window.cpp
+﻿  gdi.cpp
+  splitter.cpp
+  winapi_window.cpp
+  Generating Code...
   winapi.vcxproj -> C:\code\cpp\lib\winapi\UnicodeDebug\winapi_MDdu.lib

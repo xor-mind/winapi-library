@@ -38,7 +38,7 @@ typedef struct BasicTestWindow : public Window
 		Window::InitWnd(xpos, ypos, width, height, windowName, NULL);
 	}
 
-	virtual WND_PROC_DECL()
+	virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		if ( msg == WM_CREATE ) {
 			this->hWnd = hWnd;
@@ -54,7 +54,7 @@ typedef struct BasicTestWindow : public Window
 			DestroyWindow();
 		}
 
-		return DEF_WND_PROC;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 	virtual void Test() {};
 	virtual void Create() {}

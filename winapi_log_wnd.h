@@ -9,7 +9,7 @@ class LogWnd : public Window
 {
 	HWND m_hEditWnd;
 
-	WPD()
+	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		if ( msg == WM_CREATE )
 		{					
@@ -30,8 +30,8 @@ class LogWnd : public Window
 			return 0;
 		}
 
-		onWndDestruction
-		return DWP;		
+		if (msg == WM_DESTROY || msg == WM_CLOSE) { HandleWndDestruction(); return 0; }
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 
 public:

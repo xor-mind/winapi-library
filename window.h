@@ -26,51 +26,51 @@ an MFC CWindow. All Windows, including child Windows should be managed with smar
 //#define WND_PROC_DECL(x)      LRESULT CALLBACK x##WndProc(WND_PROC_PARAM)
 //#define DEF_WND_PROC          DefWindowProc(hWnd, msg, wParam, lParam)
 //#define DLG_PROC_DECL(x)      BOOL CALLBACK x##DlgProc(WND_PROC_PARAM)
-#define WPD					  WND_PROC_DECL
-#define DPD                   DLG_PROC_DECL
-#define DWP					  DEF_WND_PROC
-#define AppInstance			  GetModuleHandle(NULL)
-#define AppHandle			  AppInstance
-#define NBRUSH			      (HBRUSH)GetStockObject(NULL_BRUSH)
-#define GetWH				  int w = ClientWidth(), h = ClientHeight(); 
+//#define WPD					  WND_PROC_DECL
+//#define DPD                   DLG_PROC_DECL
+//#define DWP					  DEF_WND_PROC
+//#define AppInstance			  GetModuleHandle(NULL)
+//#define AppHandle			  AppInstance
+//#define NBRUSH			      (HBRUSH)GetStockObject(NULL_BRUSH)
+//#define GetWH				  int w = ClientWidth(), h = ClientHeight(); 
 
-#define onCreate			  if ( msg == WM_CREATE )        { HandleCreate(wParam, lParam); return 0; }
-#define onCommand			  if ( msg == WM_COMMAND )       { HandleCommand(wParam, lParam); return 0; }
-#define onEraseBackground     if ( msg == WM_ERASEBKGND )    { return HandleEraseBackground(wParam, lParam); }
-#define onInitDialog          if ( msg == WM_INITDIALOG )    { HandleInitDialog(wParam, lParam); return FALSE; }
-#define onKeyDown		      if ( msg == WM_KEYDOWN )       { HandleKeyDown(wParam, lParam); return 0; }
-#define onLButtonDown         if ( msg == WM_LBUTTONDOWN )   { HandleLButtonDown(MAKEPOINTS(lParam)); return 0; }
-#define onLButtonUp		      if ( msg == WM_LBUTTONUP )     { HandleLButtonUp(MAKEPOINTS(lParam)); return 0;}
-#define onMinMaxInfo		  if ( msg == WM_GETMINMAXINFO ) { HandleGetMinMaxInfo(lParam); return 0; }
-#define onMouseMove		      if ( msg == WM_MOUSEMOVE )     { HandleMouseMove(MAKEPOINTS(lParam)); return 0; }
-#define onPaint			      if ( msg == WM_PAINT )		 { beg_paint HandlePaint(dc); end_paint return 0; }
-#define onSize			      if ( msg == WM_SIZE )			 { GetWH HandleSize(w, h); return 0; }
-#define onPosition            if ( msg == WM_WINDOWPOSCHANGED ) { HandlePosition(); return 0; }
-#define onWndDestruction	  if ( msg == WM_DESTROY || msg == WM_CLOSE )		 { HandleWndDestruction(); return 0;}
+//#define onCreate			  if ( msg == WM_CREATE )        { HandleCreate(wParam, lParam); return 0; }
+//#define onCommand			  if ( msg == WM_COMMAND )       { HandleCommand(wParam, lParam); return 0; }
+//#define onEraseBackground     if ( msg == WM_ERASEBKGND )    { return HandleEraseBackground(wParam, lParam); }
+//#define onInitDialog          if ( msg == WM_INITDIALOG )    { HandleInitDialog(wParam, lParam); return FALSE; }
+//#define onKeyDown		      if ( msg == WM_KEYDOWN )       { HandleKeyDown(wParam, lParam); return 0; }
+//#define onLButtonDown         if ( msg == WM_LBUTTONDOWN )   { HandleLButtonDown(MAKEPOINTS(lParam)); return 0; }
+//#define onLButtonUp		      if ( msg == WM_LBUTTONUP )     { HandleLButtonUp(MAKEPOINTS(lParam)); return 0;}
+//#define onMinMaxInfo		  if ( msg == WM_GETMINMAXINFO ) { HandleGetMinMaxInfo(lParam); return 0; }
+//#define onMouseMove		      if ( msg == WM_MOUSEMOVE )     { HandleMouseMove(MAKEPOINTS(lParam)); return 0; }
+//#define onPaint			      if ( msg == WM_PAINT )		 { beg_paint HandlePaint(dc); end_paint return 0; }
+//#define onSize			      if ( msg == WM_SIZE )			 { int w = ClientWidth(), h = ClientHeight(); HandleSize(w, h); return 0; }
+//#define onPosition            if ( msg == WM_WINDOWPOSCHANGED ) { HandlePosition(); return 0; }
+//#define onWndDestruction	  if ( msg == WM_DESTROY || msg == WM_CLOSE )		 { HandleWndDestruction(); return 0;}
 
-#define handleCreate(x)		     void x##HandleCreate(WPARAM wParam, LPARAM lParam)
-#define handleInitDialog(x)      void x##HandleInitDialog(WPARAM wParam, LPARAM lParam)
-#define handleCommand(x)		 void x##HandleCommand(WPARAM wParam, LPARAM lParam)
-#define handleEraseBackground(x) int  x##HandleEraseBackground(WPARAM wParam, LPARAM lParam)
-#define handleKeyDown(x)		 void x##HandleKeyDown(WPARAM wParam, LPARAM lParam)
-#define handleLButtonDown(x)	 void x##HandleLButtonDown(POINTS mouse)
-#define handleLButtonUp(x)	     void x##HandleLButtonUp(POINTS mouse)
-#define handleMinMaxInfo(x)	     void x##HandleGetMinMaxInfo(LPARAM lParam)
-#define handleMouseMove(x)	     void x##HandleMouseMove(POINTS mouse)
-#define handlePaint(x)		     void x##HandlePaint(HDC dc)
-#define handlePosition(x)        void x##HandlePosition()
-#define handleSize(x)		     void x##HandleSize(int w, int h)
-#define handleWndDestruction(x)  void x##HandleWndDestruction()
+//#define handleCreate(x)		     void x##HandleCreate(WPARAM wParam, LPARAM lParam)
+//#define handleInitDialog(x)      void x##HandleInitDialog(WPARAM wParam, LPARAM lParam)
+//#define handleCommand(x)		 void x##HandleCommand(WPARAM wParam, LPARAM lParam)
+//#define handleEraseBackground(x) int  x##HandleEraseBackground(WPARAM wParam, LPARAM lParam)
+//#define handleKeyDown(x)		 void x##HandleKeyDown(WPARAM wParam, LPARAM lParam)
+//#define handleLButtonDown(x)	 void x##HandleLButtonDown(POINTS mouse)
+//#define handleLButtonUp(x)	     void x##HandleLButtonUp(POINTS mouse)
+//#define handleMinMaxInfo(x)	     void x##HandleGetMinMaxInfo(LPARAM lParam)
+//#define handleMouseMove(x)	     void x##HandleMouseMove(POINTS mouse)
+//#define handlePaint(x)		     void x##HandlePaint(HDC dc)
+//#define handlePosition(x)        void x##HandlePosition()
+//#define handleSize(x)		     void x##HandleSize(int w, int h)
+//#define handleWndDestruction(x)  void x##HandleWndDestruction()
 
-#define handleDefaultMsgs	  onPaint onSize onMinMaxInfo onWndDestruction
+//#define handleDefaultMsgs	  onPaint onSize onMinMaxInfo onWndDestruction
 
-#define processMsg(x)         if ( msg == x )
-#define processCommand(x)     if ( LOWORD(wParam) == x )
-#define beg_paint			  HDC dc = BeginPaint(Wnd(), &ps);
-#define end_paint			  EndPaint(Wnd(), &ps);
+//#define processMsg(x)         if ( msg == x )
+//#define processCommand(x)     if ( LOWORD(wParam) == x )
+//#define beg_paint			  HDC dc = BeginPaint(Wnd(), &ps);
+//#define end_paint			  EndPaint(Wnd(), &ps);
 
-#define sendLButtonDownToParent if ( msg == WM_LBUTTONDOWN ) { int x = LOWORD(lParam), y = HIWORD(lParam); POINT p = ClientToScreen(x, y); POINT p1 = parent->ScreenToClient(p); int lparam = ( p1.y << 16 ) | p1.x; SendMessage(hParent, WM_LBUTTONDOWN, lParam, 0); }
-#define sendKeyDownToParent(k) SendMessage(hParent, WM_KEYDOWN, k, NULL );
+//#define sendLButtonDownToParent if ( msg == WM_LBUTTONDOWN ) { int x = LOWORD(lParam), y = HIWORD(lParam); POINT p = ClientToScreen(x, y); POINT p1 = parent->ScreenToClient(p); int lparam = ( p1.y << 16 ) | p1.x; SendMessage(hParent, WM_LBUTTONDOWN, lParam, 0); }
+//#define sendKeyDownToParent(k) SendMessage(hParent, WM_KEYDOWN, k, NULL );
 
 class Window;
 typedef std::list<Window*> WindowList;
@@ -220,23 +220,23 @@ public:
 
 	tstring GetText();
 
-	virtual handleCreate()          {}
-	virtual handleCommand()		    {}
-	virtual handleInitDialog()		{}
-	virtual handleEraseBackground() { return 0; }
-	virtual handleKeyDown()         {}
-	virtual handleLButtonDown()	    {}
-	virtual handleLButtonUp()	    {}
-	virtual handleMinMaxInfo()	    
+	virtual void HandleCreate(WPARAM wParam, LPARAM lParam) {}
+	virtual void HandleCommand(WPARAM wParam, LPARAM lParam) {}
+	virtual void HandleInitDialog(WPARAM wParam, LPARAM lParam) {}
+	virtual int  HandleEraseBackground(WPARAM wParam, LPARAM lParam) { return 0; }
+	virtual void HandleKeyDown(WPARAM wParam, LPARAM lParam)         {}
+	virtual void HandleLButtonDown(POINTS mouse) {}
+	virtual void HandleLButtonUp(POINTS mouse) {}
+	virtual void HandleGetMinMaxInfo(LPARAM lParam)
 	{ 
 		// the minimum size of the window can be no less than 50x50
 		((LPMINMAXINFO)lParam)->ptMinTrackSize.x = 50; ((LPMINMAXINFO)lParam)->ptMinTrackSize.y = 50; 
 	}
-	virtual handleMouseMove()	    {}
-	virtual handlePaint()		    { HighlightPadding(); } 
-	virtual handlePosition()        { }
-	virtual handleSize()		    { if ( pad ) pad->WidthAndHeight(TrueClientWidth(), TrueClientHeight()); }
-	virtual handleWndDestruction()  { DestroyWindow(); if ( postQuitMessage ) { PostQuitMessage(0); } }
+	virtual void HandleMouseMove(POINTS mouse) {}
+	virtual void HandlePaint(HDC dc) { HighlightPadding(); }
+	virtual void HandlePosition() { }
+	virtual void HandleSize(int w, int h) { if ( pad ) pad->WidthAndHeight(TrueClientWidth(), TrueClientHeight()); }
+	virtual void HandleWndDestruction() { DestroyWindow(); if ( postQuitMessage ) { PostQuitMessage(0); } }
 
 	// sets and gets for Window properties
 	HWND Wnd() const { return hWnd; } // handle used in the winapi

@@ -250,7 +250,7 @@ Window * Window::InitWnd(IWindow* parent, HINSTANCE hInstance, LPCTSTR lpTemplat
 Window * Window::InitWnd(int templateId)
 {
 	InitWnd();
-	return InitWnd(NULL, AppInstance, MAKEINTRESOURCE(templateId));
+	return InitWnd(NULL, GetModuleHandle(NULL), MAKEINTRESOURCE(templateId));
 }
 
 void Window::DestroyWindow() 
@@ -286,14 +286,64 @@ void Window::SetWndClassName(const tstring& name)
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	handleDefaultMsgs
+	if (msg == WM_DESTROY || msg == WM_CLOSE) 
+	{ 
+		HandleWndDestruction(); 
+		return 0; 
+	}
+		
+	if (msg == WM_SIZE) 
+	{ 
+		int w = ClientWidth(), h = ClientHeight(); 
+		HandleSize(w, h); 
+		return 0; 
+	}
+
+	if (msg == WM_PAINT) 
+	{ 
+		HDC dc = BeginPaint(Wnd(), &ps);
+		HandlePaint(dc); 
+		EndPaint(Wnd(), &ps);
+		return 0; 
+	}
+
+	if (msg == WM_GETMINMAXINFO) 
+	{ 
+		HandleGetMinMaxInfo(lParam); 
+		return 0; 
+	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 BOOL CALLBACK Window::DlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	handleDefaultMsgs
+	if (msg == WM_DESTROY || msg == WM_CLOSE) 
+	{ 
+		HandleWndDestruction(); 
+		return 0; 
+	}
+
+	if (msg == WM_PAINT) 
+	{ 
+		HDC dc = BeginPaint(Wnd(), &ps);
+		HandlePaint(dc);
+		EndPaint(Wnd(), &ps);
+		return 0; 
+	}
+
+	if (msg == WM_GETMINMAXINFO)
+	{
+		HandleGetMinMaxInfo(lParam);
+		return 0;
+	}
+
+	if (msg == WM_SIZE)
+	{ 
+		int w = ClientWidth(), h = ClientHeight(); 
+		HandleSize(w, h); 
+		return 0; 
+	}
 
 	return FALSE; 
 }

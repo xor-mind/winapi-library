@@ -108,7 +108,7 @@ void WEsplitter::DrawSplitterGhost(HDC dc)
 Window   * WEsplitter::create(float splitRatio, uint splitBarWidth, Window* parent) 
 { 
 	splitterCount()++;
-	return ( new WEsplitter(splitRatio, splitBarWidth) ) ->InitWnd(0, 0, 0, 0, _T("Split"), NULL, parent)->SetClassCursor( IDC_SIZEWE )->SetClassBrush(NBRUSH) ; 
+	return ( new WEsplitter(splitRatio, splitBarWidth) ) ->InitWnd(0, 0, 0, 0, _T("Split"), NULL, parent)->SetClassCursor( IDC_SIZEWE )->SetClassBrush((HBRUSH)GetStockObject(NULL_BRUSH)) ;
 }
 
 int  WEsplitter ::  x() { return (int)(pClientWidth() * splitRatio); }
